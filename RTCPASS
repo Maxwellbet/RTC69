@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0061)file:///C:/Users/atmic/OneDrive/Desktop/buspass/RTCNOV28.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>RTCPASS</title>
+    <link rel="stylesheet" href="file:///C:/Users/atmic/OneDrive/Desktop/buspass/styles.css"> 
+    <title>Live Clock Overlay on Video</title>
     <style>
         body {
             margin: 0;
@@ -13,7 +13,7 @@
             margin: 0%; 
             padding: 0;
         }
-        video-container {
+        .video-container {
             position: relative;
             width: 100%;
             height: 100%;
@@ -27,7 +27,7 @@
             height: auto; /* Maintain aspect ratio */
             display: block; /* Remove extra space below video */
         }
-        clock {
+        .clock {
             position: absolute;
             bottom: 40%; /* Distance from the bottom */
             transform:100%(auto); /* Center align the clock */
@@ -37,14 +37,16 @@
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Shadow for visibility */
             font-family: 'Arial', sans-serif; /* Use Arial or any sans-serif font */
         }
+
     </style>       
 <div class="video-container">
-    <video autoplay muted loop>
+    <video autoplay="" muted="" loop="">
         <source src="C:\Users\atmic\OneDrive\Desktop\passmp4.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    <div class="clock" id="clock"></div>
+    <div class="clock" id="clock">03:22:34 AM</div>
 </div>
+
 <script>
     function updateClock() {
         const now = new Date();
@@ -52,17 +54,23 @@
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const seconds = String(now.getSeconds()).padStart(2, '0');
         const isAM = hours < 12;
+
         // Convert to 12-hour format
         hours = hours % 12 || 12; // If hours is 0, set it to 12
+
         // Format the hour to be 2 digits
         hours = String(hours).padStart(2, '0');
+
         // Determine AM/PM
         const period = isAM ? 'AM' : 'PM';
+
         // Display the clock
         document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${period}`;
     }
+
     setInterval(updateClock, 1000);
     updateClock(); // Initial call to display clock immediately
 </script>
-</body>
-</html>
+
+
+</body></html>
