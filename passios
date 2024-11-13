@@ -1,66 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#000000">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Clock Overlay on Video</title>
-    <style>
-        /* Add your CSS styling directly if you can't link the stylesheet */
-        body {
-            margin: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-        }
-        .video-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background-color: black;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .clock {
-            position: absolute;
-            bottom: 40%;
-            right: 20%;
-            font-size: 8em;
-            color: rgb(10, 6, 6);
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centered Clock on Looping MOV Video (Mobile-Friendly)</title>
+  <style>
+    /* Basic reset */
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: sans-serif;
+      color: white;
+    }
+
+    /* Full-screen video */
+    video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* Centered clock overlay with responsive font size */
+    .clock {
+      font-size: 8vw; /* Adjust font size based on viewport width */
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    }
+  </style>
 </head>
 <body>
-    <div class="video-container">
-        <video autoplay muted loop>
-            <source src="path-to-your-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div class="clock" id="clock"></div>
-    </div>
-    <script>
-        function updateClock() {
-            const now = new Date();
-            let hours = now.getHours();
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            const isAM = hours < 12;
+  <!-- Looping video -->
+  <video autoplay loop muted playsinline>
+    <source src="your-video-file.mov" type="video/quicktime">
+    Your browser does not support the video tag.
+  </video>
+  
+  <!-- Centered Clock -->
+  <div class="clock" id="clock">00:00:00</div>
 
-            hours = hours % 12 || 12;
-            hours = String(hours).padStart(2, '0');
-            const period = isAM ? 'AM' : 'PM';
+  <script>
+    // Update the clock every second
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock').textContent = now.toLocaleTimeString();
+    }
 
-            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${period}`;
-        }
-
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
+    setInterval(updateClock, 1000);
+    updateClock();  // Display time immediately
+  </script>
 </body>
 </html>
